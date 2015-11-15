@@ -1299,6 +1299,15 @@ class OVSNeutronAgent(sg_rpc.SecurityGroupAgentRpcCallbackMixin,
                 LOG.warn(_LW("Device %s not defined on plugin"), device)
                 if (port and port.ofport != -1):
                     self.port_dead(port)
+        '''
+        TODO : KULCLOUD notify new event for the ADD NFV with {dpid, in_port, out_port}
+        1. Extract NFV port pairs
+            - NFVs : [{VM_id, port_id_1, port_id_2}....]
+        2. Call rpc call
+            - for nfv in nfv_pairs:
+                self.plugin_rpc.update_nfv_up(nfv.vm_id, nfv._port1_id, nfv.port1_number,
+                                            nfv._port2_id, nfv.port2_number)
+        '''
         return skipped_devices
 
     def treat_ancillary_devices_added(self, devices):
@@ -1337,6 +1346,14 @@ class OVSNeutronAgent(sg_rpc.SecurityGroupAgentRpcCallbackMixin,
                 resync = True
                 continue
             self.port_unbound(device)
+        '''
+        TODO : KULCLOUD notify new event for the DELETE NFV with {dpid, in_port, out_port}
+        1. Extract NFV port pairs
+            - NFVs : [{VM_id, port_id_1, port_id_2}....]
+        2. Call rpc call
+            - for nfv in nfv_pairs:
+                self.plugin_rpc.update_nfv_down(nfv.vm_id)
+        '''
         return resync
 
     def treat_ancillary_devices_removed(self, devices):

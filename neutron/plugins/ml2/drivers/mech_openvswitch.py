@@ -54,3 +54,48 @@ class OpenvswitchMechanismDriver(mech_agent.SimpleAgentMechanismDriverBase):
     def check_vlan_transparency(self, context):
         """Currently Openvswitch driver doesn't support vlan transparency."""
         return False
+
+    ''' TODO : KULCLOUD, Considerin about to use ML2 driver APIs to NFV API calls with NBAPI '''
+    def create_port_postcommit(self, context):
+        """Create a port.
+
+        :param context: PortContext instance describing the port.
+
+        Called after the transaction completes. Call can block, though
+        will block the entire process so care should be taken to not
+        drastically affect performance.  Raising an exception will
+        result in the deletion of the resource.
+        """
+        pass
+
+    def update_port_postcommit(self, context):
+        """Update a port.
+
+        :param context: PortContext instance describing the new
+        state of the port, as well as the original state prior
+        to the update_port call.
+
+        Called after the transaction completes. Call can block, though
+        will block the entire process so care should be taken to not
+        drastically affect performance.  Raising an exception will
+        result in the deletion of the resource.
+
+        update_port_postcommit is called for all changes to the port
+        state. It is up to the mechanism driver to ignore state or
+        state changes that it does not know or care about.
+        """
+        pass
+
+    def delete_port_postcommit(self, context):
+        """Delete a port.
+
+        :param context: PortContext instance describing the current
+        state of the port, prior to the call to delete it.
+
+        Called after the transaction completes. Call can block, though
+        will block the entire process so care should be taken to not
+        drastically affect performance.  Runtime errors are not
+        expected, and will not prevent the resource from being
+        deleted.
+        """
+        pass
