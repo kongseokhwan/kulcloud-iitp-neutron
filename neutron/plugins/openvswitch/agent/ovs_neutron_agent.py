@@ -537,7 +537,8 @@ class OVSNeutronAgent(sg_rpc.SecurityGroupAgentRpcCallbackMixin,
                 LOG.error(_LE("No local VLAN available for net-id=%s"),
                           net_uuid)
                 return
-            lvid = self.available_local_vlans.pop()
+            ''' TODO : Kulcloud remove : lvid = self.available_local_vlans.pop()'''
+            lvid = 0
             self.local_vlan_map[net_uuid] = LocalVLANMapping(lvid,
                                                              network_type,
                                                              physical_network,
